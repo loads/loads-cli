@@ -1,0 +1,13 @@
+.DS_Store
+*.py[oc]
+*.sw[op]
+venv/
+*egg*
+_temp/
+build/
+
+# pyenv
+.python-version
+
+# we don't want to check this in
+README.txt

@@ -1,0 +1,4 @@
+requests
+outlawg
+flake8
+tox
