@@ -1,5 +1,4 @@
 import sys
-# import argparse
 from argparse import ArgumentParser
 from loads.fetchconf import fetch
 from loads.loadconf import load_config
@@ -8,45 +7,10 @@ from loads.utils import process
 from pprint import pprint
 
 
-def plan_list():
-    dummy_out = """
-    Pulling CoreOS AMI info...
-    Verifying database setup.
-
-    Finished database setup.
-    Listening on port 8080...
-    Found 0 instances to recover.
-    Finished initializing: None.
-
-    --------------------------
-    PROJECT: Autopush Architecture
-    --------------------------
-
-    PLANS
-    """
-    print(dummy_out)
-    return [
-        '1. Long Connection Test - 80',
-        '2. Long Connection Test - 40 - us east 1',
-        '3. Long Connection Test - 80 - us west 1',
-        '4. Long Connection Test - 80 - us west 2',
-        '5. Long Connection Test - 80 - us west 2 - bigger',
-        '6. Loadtest',
-    ]
-
-
 def main(argv=None):
     if argv is None:
         argv = sys.argv
 
-    # it doesn't parse -h and print help.
-    """
-    conf_parser = argparse.ArgumentParser(
-        description=__doc__, # printed with -h/--help
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        add_help=False
-        )
-    """
     conf_parser = ArgumentParser(prog='loads-cli')
 
     conf_parser.add_argument("-f", "--fetchconf",
@@ -76,11 +40,9 @@ def main(argv=None):
         fetch(args.fetchconf)
 
     if args.loadconf:
-        load_config(args.loadconf)
-
-    if args.run:
-        plans = plan_list()
+        plans = load_config(args.loadconf)
         pprint(plans)
+        exit()
 
         while True:
             response = input('Enter plan #: ')
