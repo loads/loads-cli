@@ -1,11 +1,14 @@
 import os
 import json
 import requests
+from outlawg import Outlawg
 
 from loads import (
     URL_GITHUB_RAW,
     DIR_TEMP
 )
+
+Log = Outlawg()
 
 
 # https://raw.githubusercontent.com/rpappalax/dummy-app-01/master/loads.json
@@ -18,7 +21,13 @@ def url_manifest(owner, repo, branch='master'):
 
 
 def fetch_json(url):
+    Log.header('DOWNLOADING JSON FILE')
     r = requests.get(url)
+    if r.status_code == 200:
+        print('DONE!')
+    else:
+        print('ERROR: DOWNLOAD FAILED!')
+        exit()
     parsed = r.json()
     return json.dumps(parsed, indent=4)
 

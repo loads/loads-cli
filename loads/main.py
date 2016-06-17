@@ -12,19 +12,11 @@ def main(argv=None):
         argv = sys.argv
 
     conf_parser = ArgumentParser(prog='loads-cli')
-
-    conf_parser.add_argument("-f", "--fetchconf",
-                             help="Fetch config (json) file from GitHub repo\n"
-                             "i.e.: <repo owner>/<repo name>")
-    conf_parser.add_argument("-l", "--loadconf",
-                             help="Load config (json) file\n"
-                             "use same format ast for fetchconfg\n"
-                             "i.e.: <repo owner>/<repo name>")
     conf_parser.add_argument("-c", "--config-overview",
                              help="Return summary overview of project config")
     conf_parser.add_argument("-r", "--run",
-                             help="Launches interactive testplan runner",
-                             action='store_true')
+                             help="Launches interactive testplan runner"
+                             "i.e.: <repo owner>/<repo name>")
     conf_parser.add_argument("-a", "--abort",
                              help="Abort run")
     conf_parser.add_argument("-d", "--delete",
@@ -36,13 +28,9 @@ def main(argv=None):
 
     args = conf_parser.parse_args()
 
-    if args.fetchconf:
-        fetch(args.fetchconf)
-
-    if args.loadconf:
-        plans = load_config(args.loadconf)
-        pprint(plans)
-        exit()
+    if args.run:
+        fetch(args.run)
+        plans = load_config(args.run)
 
         while True:
             response = input('Enter plan #: ')

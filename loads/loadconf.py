@@ -2,7 +2,7 @@ import os
 
 from loads import (
     DIR_TEMP,
-) 
+)
 from loads.utils import (
    process,
    process_parse
