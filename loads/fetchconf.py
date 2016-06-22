@@ -37,7 +37,7 @@ def write_file(owner, repo, contents, filename='loads.json'):
     os.makedirs(path, exist_ok=True)
 
     path = os.path.join(path, filename)
-    with open(path, 'a') as fh:
+    with open(path, 'w') as fh:
         fh.write(str(contents))
 
 

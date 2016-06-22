@@ -15,6 +15,8 @@ PATH_LOADS_BROKER = '{0}/loads-broker'.format(DIR_TEMP)
 
 def load_config(github_owner_repo):
     loads_broker_install()
+
+    # Returns plans for the user to select as a list of dicts
     return loads_broker_run(github_owner_repo)
 
 
@@ -48,24 +50,17 @@ def loads_broker_install():
 def print_menu(plans):
     Log.header('RUN MENU')
     i = 1
-    for menu, uuids in plans.items():
-        print('{0}. {1}'.format(i, menu))
+    for item in plans:
+        print('{0}. {1}'.format(i, item['description']))
         i += 1
+
 
 def loads_broker_run(github_owner_repo):
     owner, repo = github_owner_repo.split('/', 1)
     plans = process_parse(
-        'loads-broker -k /Users/rpappalardo/.ssh/loads.pem --no-influx --initial-db _temp/scenarios/rpappalax/dummy-app-01/loads.json',
+        'loads-broker -k /Users/chartjes/.ssh/loads.pem --no-influx --initial-db _temp/scenarios/rpappalax/dummy-app-01/loads.json',
         'START LOADS-BROKER',
     )
-
     print_menu(plans)
-    """
     Log.header('RUN MENU')
-    i = 1
-    for menu, uuids in plans.items():
-        print('{0}. {1}'.format(i, menu))
-        i += 1
-    return plans 
-    """
-    Log.header('RUN MENU')
+    return plans

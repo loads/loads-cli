@@ -2,7 +2,8 @@ import sys
 from argparse import ArgumentParser
 from loads.fetchconf import fetch
 from loads.loadconf import load_config
-from loads.utils import process 
+from loads.run import run_test
+from loads.utils import process
 
 from pprint import pprint
 
@@ -41,13 +42,13 @@ def main(argv=None):
             try:
                 plan_number = int(response)
                 plan_number -= 1
-                if plans[plan_number]:
-                    print('yay!')
-                    break
+                uuid = plans[plan_number]['uuid']
+                run_test(uuid)
+                break
             except:
                 print(msg_err)
 
-        print(plans[int(plan_number)])
+        #print(plans[int(plan_number)])
 
     return(0)
 
