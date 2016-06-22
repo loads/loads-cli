@@ -45,6 +45,13 @@ def loads_broker_install():
         )
 
 
+def print_menu(plans):
+    Log.header('RUN MENU')
+    i = 1
+    for menu, uuids in plans.items():
+        print('{0}. {1}'.format(i, menu))
+        i += 1
+
 def loads_broker_run(github_owner_repo):
     owner, repo = github_owner_repo.split('/', 1)
     plans = process_parse(
@@ -52,9 +59,13 @@ def loads_broker_run(github_owner_repo):
         'START LOADS-BROKER',
     )
 
+    print_menu(plans)
+    """
     Log.header('RUN MENU')
     i = 1
     for menu, uuids in plans.items():
         print('{0}. {1}'.format(i, menu))
         i += 1
     return plans 
+    """
+    Log.header('RUN MENU')
