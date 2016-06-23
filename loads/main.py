@@ -3,9 +3,6 @@ from argparse import ArgumentParser
 from loads.fetchconf import fetch
 from loads.loadconf import load_config
 from loads.run import run_test
-from loads.utils import process
-
-from pprint import pprint
 
 
 def main(argv=None):
@@ -31,7 +28,7 @@ def main(argv=None):
 
     if args.run:
         fetch(args.run)
-        plans = load_config(args.run)
+        proc, plans = load_config(args.run)
 
         while True:
             response = input('Enter plan #: ')
@@ -43,12 +40,10 @@ def main(argv=None):
                 plan_number = int(response)
                 plan_number -= 1
                 uuid = plans[plan_number]['uuid']
-                run_test(uuid)
+                print(run_test(proc, uuid))
                 break
             except:
                 print(msg_err)
-
-        #print(plans[int(plan_number)])
 
     return(0)
 

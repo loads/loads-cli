@@ -1,7 +1,4 @@
-import os
-import socket
 from subprocess import Popen, PIPE, STDOUT
-import pprint
 from outlawg import Outlawg
 
 
@@ -24,7 +21,8 @@ def process(cmd, header_label):
 
 def description_parse(description_raw):
     tmp = description_raw.replace(LABEL_PLAN_FOUND, "")
-    return tmp.replace(LABEL_PLAN_FOUND, "")
+    return tmp.replace(LABEL_PLAN_ADDED, "")
+
 
 def process_parse(cmd, header_label):
     proc = Popen(cmd, stdout=PIPE, stderr=STDOUT, shell=True)
@@ -45,9 +43,9 @@ def process_parse(cmd, header_label):
             menu_item = line_chunks[0].split('] ')
 
             d = {}
-            d['description'] = menu_item[1].replace(LABEL_PLAN_FOUND, "")
+            d['description'] = description_parse(menu_item[1])
             d['uuid'] = line_chunks[1].replace("\'", "")
 
             uuids.append(d)
 
-    return uuids
+    return proc, uuids

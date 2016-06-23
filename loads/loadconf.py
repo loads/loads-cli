@@ -34,7 +34,8 @@ def loads_broker_install():
     if not (os.path.isdir(PATH_LOADS_BROKER)):
         Log.header('INSTALL LOADS-BROKER')
         process(
-            'git clone https://github.com/loads/loads-broker _temp/loads-broker',
+            'git clone https://github.com/loads/loads-broker \
+                 _temp/loads-broker',
             'Installing loads-broker'
         )
         process(
@@ -57,10 +58,10 @@ def print_menu(plans):
 
 def loads_broker_run(github_owner_repo):
     owner, repo = github_owner_repo.split('/', 1)
-    plans = process_parse(
-        'loads-broker -k /Users/chartjes/.ssh/loads.pem --no-influx --initial-db _temp/scenarios/rpappalax/dummy-app-01/loads.json',
+    proc, plans = process_parse(
+        'loads-broker -k /Users/chartjes/.ssh/loads.pem --no-influx \
+        --initial-db _temp/scenarios/rpappalax/dummy-app-01/loads.json',
         'START LOADS-BROKER',
     )
     print_menu(plans)
-    Log.header('RUN MENU')
-    return plans
+    return proc, plans
