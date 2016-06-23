@@ -1,3 +1,5 @@
+from loads import HOST, PORT
+
 import requests
 
 
@@ -7,7 +9,7 @@ def run_test(proc, plan_uuid):
     Send it to loads-broker
     Stand back and let it run
     """
-    url = 'http://localhost:8080/api/orchestrate/{0}'.format(plan_uuid)
+    url = 'http://{0}:{1}/api/orchestrate/{2}'.format(HOST, PORT, plan_uuid)
     r = requests.post(url)
     print(r.text)
 
