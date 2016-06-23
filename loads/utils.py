@@ -8,7 +8,8 @@ from outlawg import Outlawg
 Log = Outlawg()
 
 SEP = ', UUID: '
-SEP_PLAN = 'Found plan: '
+LABEL_PLAN_FOUND = 'Found plan: '
+LABEL_PLAN_ADDED = 'Added plan: '
 HOST = '127.0.0.1'
 PORT = 8080
 STOP_FLAG = 'Listening on port'
@@ -20,6 +21,10 @@ def process(cmd, header_label):
     for line in iter(proc.stdout.readline, b''):
         print(line.strip())
 
+
+def description_parse(description_raw):
+    tmp = description_raw.replace(LABEL_PLAN_FOUND, "")
+    return tmp.replace(LABEL_PLAN_FOUND, "")
 
 def process_parse(cmd, header_label):
     proc = Popen(cmd, stdout=PIPE, stderr=STDOUT, shell=True)
@@ -40,7 +45,7 @@ def process_parse(cmd, header_label):
             menu_item = line_chunks[0].split('] ')
 
             d = {}
-            d['description'] = menu_item[1].replace(SEP_PLAN, "")
+            d['description'] = menu_item[1].replace(LABEL_PLAN_FOUND, "")
             d['uuid'] = line_chunks[1].replace("\'", "")
 
             uuids.append(d)
