@@ -10,19 +10,9 @@ def main(argv=None):
         argv = sys.argv
 
     conf_parser = ArgumentParser(prog='loads-cli')
-    conf_parser.add_argument("-c", "--config-overview",
-                             help="Return summary overview of project config")
     conf_parser.add_argument("-r", "--run",
                              help="Launches interactive testplan runner"
                              "i.e.: <repo owner>/<repo name>")
-    conf_parser.add_argument("-a", "--abort",
-                             help="Abort run")
-    conf_parser.add_argument("-d", "--delete",
-                             help="Delete run from database (KILL THIS?)")
-    conf_parser.add_argument("-i", "--info",
-                             help="Get historical run info from loads-broker")
-    conf_parser.add_argument("-s", "--status",
-                             help="Show status of current test run")
 
     args = conf_parser.parse_args()
 

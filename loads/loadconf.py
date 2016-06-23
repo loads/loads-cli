@@ -67,4 +67,5 @@ def loads_broker_run(github_owner_repo):
         'START LOADS-BROKER',
     )
     print_menu(plans)
+    Log.header('RUN MENU')
     return proc, plans
