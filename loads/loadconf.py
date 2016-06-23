@@ -16,7 +16,10 @@ PATH_LOADS_BROKER = '{0}/loads-broker'.format(DIR_TEMP)
 def load_config(github_owner_repo):
     loads_broker_install()
 
-    # Returns plans for the user to select as a list of dicts
+    """
+    Returns the loads-broker process handle and a list of dicts that represent
+    plans for the user to select
+    """
     return loads_broker_run(github_owner_repo)
 
 
