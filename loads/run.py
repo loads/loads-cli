@@ -4,8 +4,7 @@ import requests
 
 
 def run_test(proc, plan_uuid):
-    """
-    Build our POST request
+    """Build our POST request
     Send it to loads-broker
     Stand back and let it run
     """

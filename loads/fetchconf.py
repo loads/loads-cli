@@ -48,6 +48,10 @@ def fetch(github_owner_repo):
     write_file(owner, repo, loads_json)
 
 
+'''This is only to be used if you are testing out changes to fetchconf in
+isolation from other parts of loads-cli
+'''
+
 if __name__ == '__main__':
 
     url = url_manifest('rpappalax', 'dummy-app-01')

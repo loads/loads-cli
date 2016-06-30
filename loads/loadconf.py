@@ -2,6 +2,7 @@ import os
 
 from loads import (
     DIR_TEMP,
+    PEM_FILE,
 )
 from loads.utils import (
    process,
@@ -38,15 +39,16 @@ def loads_broker_install():
         Log.header('INSTALL LOADS-BROKER')
         process(
             'git clone https://github.com/loads/loads-broker \
-                 _temp/loads-broker',
+                 {0}/loads-broker'.format(DIR_TEMP),
             'Installing loads-broker'
         )
         process(
-            'cd _temp/loads-broker;pip install -r test-requirements.txt',
+            'cd {0}/loads-broker; \
+             pip install -r test-requirements.txt'.format(DIR_TEMP),
             'Installing loads-broker libraries'
         )
         process(
-            'cd _temp/loads-broker;python setup.py develop',
+            'cd {0}/loads-broker;python setup.py develop'.format(DIR_TEMP),
             'Setting up loads-broker'
         )
 
@@ -59,11 +61,12 @@ def print_menu(plans):
         i += 1
 
 
-def loads_broker_run(github_owner_repo):
+def loads_broker_run(github_owner_repo, filename='loads.json'):
     owner, repo = github_owner_repo.split('/', 1)
     proc, plans = process_parse(
-        'loads-broker -k /Users/chartjes/.ssh/loads.pem --no-influx \
-        --initial-db _temp/scenarios/rpappalax/dummy-app-01/loads.json',
+        'loads-broker -k {0} --no-influx \
+        --initial-db {1}/scenarios/{2}/{3}/{4}'.format(
+            PEM_FILE, DIR_TEMP, owner, repo, filename),
         'START LOADS-BROKER',
     )
     print_menu(plans)
